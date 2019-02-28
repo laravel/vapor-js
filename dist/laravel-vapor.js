@@ -1,2 +1,2 @@
-require("axios");var o=function(){};o.prototype.store=function(o,e,n){void 0===n&&(n=null),console.log("here")},module.exports=new o;
+var r=require("axios"),e=function(){};e.prototype.store=function(e,o){void 0===o&&(o=null);try{return Promise.resolve(r.post("/vapor/signed-storage-url")).then(function(t){return void 0===o.progress&&(o.progress=function(){}),Promise.resolve(r.put(t.data.url,e,{headers:t.data.headers,onUploadProgress:function(r){o.progress(r.loaded/r.total)}})).then(function(r){return t.data})})}catch(r){return Promise.reject(r)}},module.exports=new e;
 //# sourceMappingURL=laravel-vapor.js.map
