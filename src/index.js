@@ -10,4 +10,4 @@ class Vapor
     }
 }
 
-module.exports = Vapor;
+module.exports = new Vapor();
