@@ -2,7 +2,7 @@ const axios = require('axios')
 
 class Vapor
 {
-    store() {
+    store(file, onSuccessUrl, options) {
         //
     }
 }
