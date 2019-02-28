@@ -1,2 +1,2 @@
-var o=require("axios"),e=function(){};e.prototype.work=function(){o.get("/foo").then(function(o){console.log(o.data)})},module.exports=new e;
+require("axios");var o=function(){};o.prototype.store=function(o,e,n){void 0===n&&(n=null),console.log("here")},module.exports=new o;
 //# sourceMappingURL=laravel-vapor.js.map

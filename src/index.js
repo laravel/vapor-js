@@ -2,8 +2,8 @@ const axios = require('axios')
 
 class Vapor
 {
-    store(file, onSuccessUrl, options) {
-        //
+    store(file, onSuccessUrl, options = null) {
+        console.log('here');
     }
 }
 
