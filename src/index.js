@@ -2,8 +2,15 @@ const axios = require('axios')
 
 class Vapor
 {
+    /**
+     * Store a file in S3 and return its UUID, key, and other information.
+     */
     async store(file, options = null) {
-        const response = await axios.post('/vapor/signed-storage-url');
+        const response = await axios.post('/vapor/signed-storage-url', {
+            'bucket': options.bucket || '',
+            'content_type': options.contentType || '',
+            'expires': options.expires || ''
+        });
 
         if (typeof options.progress === 'undefined') {
             options.progress = () => {};
