@@ -6,6 +6,8 @@ class Vapor
      * Store a file in S3 and return its UUID, key, and other information.
      */
     async store(file, options = null) {
+        console.log(file);
+
         const response = await axios.post('/vapor/signed-storage-url', {
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
