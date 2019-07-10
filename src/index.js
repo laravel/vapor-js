@@ -23,6 +23,8 @@ class Vapor
             }
         });
 
+        response.data.extension = file.name.split('.').pop()
+
         return response.data;
     }
 }
