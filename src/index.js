@@ -10,6 +10,8 @@ class Vapor
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
             'expires': options.expires || ''
+        }, {
+            baseURL: options.baseURL || null
         });
 
         let headers = response.data.headers;
