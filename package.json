@@ -1,6 +1,6 @@
 {
   "name": "laravel-vapor",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "JavaScript utilities for Laravel Vapor",
   "repository": {
     "type": "git",
