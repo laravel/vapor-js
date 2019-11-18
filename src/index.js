@@ -10,14 +10,22 @@ class Vapor
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
             'expires': options.expires || ''
+        }, {
+            baseURL: options.baseURL || null
         });
+
+        let headers = response.data.headers;
+
+        if ('Host' in headers) {
+            delete headers.Host;
+        }
 
         if (typeof options.progress === 'undefined') {
             options.progress = () => {};
         }
 
         const s3Response = await axios.put(response.data.url, file, {
-            headers: response.data.headers,
+            headers: headers,
             onUploadProgress: (progressEvent) => {
                 options.progress(progressEvent.loaded / progressEvent.total);
             }
