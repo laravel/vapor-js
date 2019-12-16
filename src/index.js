@@ -9,7 +9,8 @@ class Vapor
         const response = await axios.post('/vapor/signed-storage-url', {
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
-            'expires': options.expires || ''
+            'expires': options.expires || '',
+            'visibility': options.visibility || ''
         }, {
             baseURL: options.baseURL || null
         });
