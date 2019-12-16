@@ -5,11 +5,12 @@ class Vapor
     /**
      * Store a file in S3 and return its UUID, key, and other information.
      */
-    async store(file, options = null) {
+    async store(file, options = {}) {
         const response = await axios.post('/vapor/signed-storage-url', {
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
-            'expires': options.expires || ''
+            'expires': options.expires || '',
+            'visibility': options.visibility || ''
         }, {
             baseURL: options.baseURL || null
         });
@@ -24,7 +25,7 @@ class Vapor
             options.progress = () => {};
         }
 
-        const s3Response = await axios.put(response.data.url, file, {
+        await axios.put(response.data.url, file, {
             headers: headers,
             onUploadProgress: (progressEvent) => {
                 options.progress(progressEvent.loaded / progressEvent.total);
