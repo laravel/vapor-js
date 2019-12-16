@@ -24,7 +24,7 @@ class Vapor
             options.progress = () => {};
         }
 
-        const s3Response = await axios.put(response.data.url, file, {
+        await axios.put(response.data.url, file, {
             headers: headers,
             onUploadProgress: (progressEvent) => {
                 options.progress(progressEvent.loaded / progressEvent.total);
