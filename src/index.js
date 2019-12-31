@@ -10,7 +10,8 @@ class Vapor
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
             'expires': options.expires || '',
-            'visibility': options.visibility || ''
+            'visibility': options.visibility || '',
+            'guard': options.guard || ''
         }, {
             baseURL: options.baseURL || null,
             headers: options.headers || {}
