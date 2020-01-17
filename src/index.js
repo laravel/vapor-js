@@ -12,7 +12,8 @@ class Vapor
             'expires': options.expires || '',
             'visibility': options.visibility || ''
         }, {
-            baseURL: options.baseURL || null
+            baseURL: options.baseURL || null,
+            headers: options.headers || {}
         });
 
         let headers = response.data.headers;
