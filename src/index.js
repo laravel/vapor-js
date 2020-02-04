@@ -37,17 +37,17 @@ class Vapor
         await function() {
             return new Promise(function(resolve) {
 
-                let xhr = new XMLHttpRequest();
-                xhr.open('PUT', response.url);
+                let request = new XMLHttpRequest();
+                request.open('PUT', response.url);
 
-                xhr.onload = () => resolve(xhr.response);
-                xhr.upload.onprogress = (e) => options.progress(Math.ceil((e.loaded / e.total) * 100));
+                request.onload = () => resolve(request.response);
+                request.upload.onprogress = (e) => options.progress(Math.ceil((e.loaded / e.total) * 100));
 
                 for (const header in headers) {
-                    xhr.setRequestHeader(header, headers[header]);
+                    request.setRequestHeader(header, headers[header]);
                 }
 
-                xhr.send(file);
+                request.send(file);
 
             });
         }();
