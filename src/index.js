@@ -1,41 +1,60 @@
-const axios = require('axios')
-
 class Vapor
 {
     /**
      * Store a file in S3 and return its UUID, key, and other information.
      */
-    async store(file, options = {}) {
-        const response = await axios.post('/vapor/signed-storage-url', {
-            'bucket': options.bucket || '',
-            'content_type': options.contentType || file.type,
-            'expires': options.expires || '',
-            'visibility': options.visibility || ''
-        }, {
-            baseURL: options.baseURL || null,
-            headers: options.headers || {}
-        });
+    async store(file, options = {})
+    {
+        let data = new FormData();
+        data.append('bucket', options.bucket || '');
+        data.append('content_type', options.contentType || file.type);
+        data.append('expires', options.expires || '');
+        data.append('visibility', options.visibility || '');
 
-        let headers = response.data.headers;
+        let response = JSON.parse(await function() {
+            return new Promise(function(resolve) {
+
+                let request = new XMLHttpRequest();
+                request.open('POST', '/vapor/signed-storage-url');
+
+                request.onload = () => resolve(request.response);
+
+                for (const header in options.headers) {
+                    request.setRequestHeader(header, options.headers[header]);
+                }
+
+                request.send(data);
+
+            });
+        }());
+
+        let headers = response.headers;
 
         if ('Host' in headers) {
             delete headers.Host;
         }
 
-        if (typeof options.progress === 'undefined') {
-            options.progress = () => {};
-        }
+        await function() {
+            return new Promise(function(resolve) {
 
-        await axios.put(response.data.url, file, {
-            headers: headers,
-            onUploadProgress: (progressEvent) => {
-                options.progress(progressEvent.loaded / progressEvent.total);
-            }
-        });
+                let xhr = new XMLHttpRequest();
+                xhr.open('PUT', response.url);
 
-        response.data.extension = file.name.split('.').pop()
+                xhr.onload = () => resolve(xhr.response);
+                xhr.upload.onprogress = (e) => options.progress(Math.ceil((e.loaded / e.total) * 100));
 
-        return response.data;
+                for (const header in headers) {
+                    xhr.setRequestHeader(header, headers[header]);
+                }
+
+                xhr.send(file);
+
+            });
+        }();
+
+        response.extension = file.name.split('.').pop();
+
+        return response;
     }
 }
 

@@ -19,9 +19,6 @@
     "build": "microbundle",
     "dev": "microbundle watch"
   },
-  "dependencies": {
-    "axios": "^0.18.0"
-  },
   "devDependencies": {
     "microbundle": "^0.10.1"
   }
