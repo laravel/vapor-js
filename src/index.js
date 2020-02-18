@@ -26,12 +26,15 @@ class Vapor
             options.progress = () => {};
         }
 
+        const cancelToken = options.cancelToken || ''
+
         await axios.put(response.data.url, file, {
+            cancelToken: cancelToken,
             headers: headers,
             onUploadProgress: (progressEvent) => {
                 options.progress(progressEvent.loaded / progressEvent.total);
             }
-        });
+        })
 
         response.data.extension = file.name.split('.').pop()
 
