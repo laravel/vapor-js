@@ -3,10 +3,6 @@ const CancelToken = axios.CancelToken
 
 class Vapor
 {
-    constructor() {
-        this.cancelToken = null
-    }
-    
     /**
      * Store a file in S3 and return its UUID, key, and other information.
      */
@@ -34,7 +30,7 @@ class Vapor
         this.cancelToken = CancelToken.source()
 
         await axios.put(response.data.url, file, {
-            cancelToken: this.cancelToken,
+            cancelToken: this.cancelToken.token,
             headers: headers,
             onUploadProgress: (progressEvent) => {
                 options.progress(progressEvent.loaded / progressEvent.total);
