@@ -30,7 +30,7 @@ class Vapor
         this.cancelToken = CancelToken.source()
 
         await axios.put(response.data.url, file, {
-            cancelToken: cancelToken,
+            cancelToken: this.cancelToken,
             headers: headers,
             onUploadProgress: (progressEvent) => {
                 options.progress(progressEvent.loaded / progressEvent.total);
