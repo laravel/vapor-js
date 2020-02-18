@@ -1,5 +1,4 @@
 const axios = require('axios')
-const CancelToken = axios.CancelToken
 
 class Vapor
 {
@@ -27,28 +26,19 @@ class Vapor
             options.progress = () => {};
         }
 
-        this.cancelToken = CancelToken.source()
+        const cancelToken = options.cancelToken || ''
 
         await axios.put(response.data.url, file, {
-            cancelToken: this.cancelToken.token,
+            cancelToken: cancelToken,
             headers: headers,
             onUploadProgress: (progressEvent) => {
                 options.progress(progressEvent.loaded / progressEvent.total);
             }
         })
 
-        this.cancelToken = null
-
         response.data.extension = file.name.split('.').pop()
 
         return response.data;
-    }
-
-    cancel() {
-        if (this.cancelToken) {
-            this.cancelToken.cancel()
-            this.cancelToken = null
-        }
     }
 }
 
