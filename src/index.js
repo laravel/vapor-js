@@ -3,6 +3,10 @@ const CancelToken = axios.CancelToken
 
 class Vapor
 {
+    constructor() {
+        this.cancelToken = null
+    }
+    
     /**
      * Store a file in S3 and return its UUID, key, and other information.
      */
