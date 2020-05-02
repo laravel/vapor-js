@@ -13,7 +13,8 @@ class Vapor
             'visibility': options.visibility || ''
         }, {
             baseURL: options.baseURL || null,
-            headers: options.headers || {}
+            headers: options.headers || {},
+            ...options.options
         });
 
         let headers = response.data.headers;
