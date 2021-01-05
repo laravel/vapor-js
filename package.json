@@ -20,7 +20,7 @@
     "dev": "microbundle watch"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "microbundle": "^0.10.1"
