@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/laravel/vapor-js",
   "main": "dist/laravel-vapor.js",
+  "typings": "index.d.ts",
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch"
