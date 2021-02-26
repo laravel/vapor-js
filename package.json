@@ -23,6 +23,6 @@
     "axios": "^0.21.1"
   },
   "devDependencies": {
-    "microbundle": "^0.10.1"
+    "microbundle": "^0.13.0"
   }
 }
