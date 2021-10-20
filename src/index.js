@@ -1,7 +1,18 @@
 const axios = require('axios')
 
+const assetUrl = process.env.MIX_VAPOR_ASSET_URL
+    ? process.env.MIX_VAPOR_ASSET_URL
+    : '';
+
 class Vapor
 {
+   /**
+     * Generate the S3 URL to an application asset.
+     */
+    asset(path) {
+        return assetUrl + '/' + path;
+    }
+
     /**
      * Store a file in S3 and return its UUID, key, and other information.
      */
