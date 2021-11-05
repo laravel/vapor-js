@@ -21,7 +21,8 @@ class Vapor
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
             'expires': options.expires || '',
-            'visibility': options.visibility || ''
+            'visibility': options.visibility || '',
+            ...options.data
         }, {
             baseURL: options.baseURL || null,
             headers: options.headers || {},
