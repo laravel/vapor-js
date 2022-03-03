@@ -6,7 +6,7 @@ const assetUrl = process.env.MIX_VAPOR_ASSET_URL
 
 class Vapor
 {
-   /**
+    /**
      * Generate the S3 URL to an application asset.
      */
     asset(path) {
