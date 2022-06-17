@@ -1,8 +1,16 @@
 const axios = require('axios')
 
-const assetUrl = process.env.MIX_VAPOR_ASSET_URL
-    ? process.env.MIX_VAPOR_ASSET_URL
-    : '';
+let assetUrlResolver = () => {
+    try {
+        return process.env.MIX_VAPOR_ASSET_URL
+            ? process.env.MIX_VAPOR_ASSET_URL
+            : '';
+    } catch (e) {
+        console.error('Unable to automatically resolve the asset URL. Use Vapor.withBaseAssetUrl() to specify it manually.')
+
+        throw e
+    }
+}
 
 class Vapor
 {
@@ -10,7 +18,14 @@ class Vapor
      * Generate the S3 URL to an application asset.
      */
     asset(path) {
-        return assetUrl + '/' + path;
+        return assetUrlResolver() + '/' + path;
+    }
+
+    /**
+     * Set the base URL for assets.
+     */
+    withBaseAssetUrl(url) {
+        assetUrlResolver = () => url ? url : ''
     }
 
     /**
