@@ -1,4 +1,4 @@
-const axios = require('axios')
+import axios from 'axios'
 
 let assetUrlResolver = () => {
     try {
@@ -70,4 +70,4 @@ class Vapor
     }
 }
 
-module.exports = new Vapor();
+export default new Vapor();
