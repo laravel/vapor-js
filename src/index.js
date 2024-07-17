@@ -33,6 +33,7 @@ class Vapor
      */
     async store(file, options = {}) {
         const httpClient = options.httpClient ? options.httpClient : axios;
+
         const response = await httpClient.post(options.signedStorageUrl ? options.signedStorageUrl : '/vapor/signed-storage-url', {
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
