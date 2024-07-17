@@ -32,7 +32,8 @@ class Vapor
      * Store a file in S3 and return its UUID, key, and other information.
      */
     async store(file, options = {}) {
-        const response = await axios.post(options.signedStorageUrl ? options.signedStorageUrl : '/vapor/signed-storage-url', {
+        const httpClient = options.httpClient ? options.httpClient : axios;
+        const response = await httpClient.post(options.signedStorageUrl ? options.signedStorageUrl : '/vapor/signed-storage-url', {
             'bucket': options.bucket || '',
             'content_type': options.contentType || file.type,
             'expires': options.expires || '',
@@ -56,7 +57,7 @@ class Vapor
 
         const cancelToken = options.cancelToken || ''
 
-        await axios.put(response.data.url, file, {
+        await httpClient.put(response.data.url, file, {
             cancelToken: cancelToken,
             headers: headers,
             onUploadProgress: (progressEvent) => {
