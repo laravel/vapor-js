@@ -24,5 +24,8 @@
   },
   "devDependencies": {
     "microbundle": "^0.13.0"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.1.3"
   }
 }
